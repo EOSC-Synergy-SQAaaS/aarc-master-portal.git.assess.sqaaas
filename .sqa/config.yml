@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/rcauth-eu/aarc-master-portal:
+      branch: 0.2.3-release
+      repo: https://github.com/rcauth-eu/aarc-master-portal.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/rcauth-eu/aarc-master-portal git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-viridian-spaniel.sh
+        container: qc.acc_tacky-persimmon-squirrel
+  QC.Doc:
+    repos:
+      github.com/rcauth-eu/aarc-master-portal find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-red-ant.sh
+        container: qc.doc_sloppy-ultramarine-starfish
+      github.com/rcauth-eu/aarc-master-portal git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-linen-cuttlefish.sh
+        container: qc.doc_hilly-ivory-flamingo
+      github.com/rcauth-eu/aarc-master-portal markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-zucchini-frise.sh
+        container: qc.doc_skanky-dandelion-bulldog
+  QC.Lic:
+    repos:
+      github.com/rcauth-eu/aarc-master-portal licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-pear-stoat.sh
+        container: qc.lic_surly-emerald-badger
+  QC.Sty:
+    repos:
+      github.com/rcauth-eu/aarc-master-portal checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-apricot-toucan.sh
+        container: qc.sty_slimy-yellow-swan
+  QC.Ver:
+    repos:
+      github.com/rcauth-eu/aarc-master-portal get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-tan-camel.sh
+        container: qc.ver_messy-brown-cockroach
+timeout: 5400
